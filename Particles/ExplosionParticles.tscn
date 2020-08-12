@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Particles/FreeScript.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.867188, 0, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.0126582, 76.3636 ), 0.0, 0.0, 0, 0, Vector2( 1, -200 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -1.21193, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.78
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+linear_accel_random = 0.48
+linear_accel_curve = SubResource( 5 )
+scale = 15.0
+scale_random = 0.57
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 3 )
+
+[node name="ExplosionParticles" type="Particles2D"]
+position = Vector2( 1, 0 )
+z_index = 10
+emitting = false
+amount = 700
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.36
+explosiveness = 1.0
+fract_delta = false
+process_material = SubResource( 1 )
+script = ExtResource( 1 )

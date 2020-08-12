@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Actors/Enemies/Tank.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Tank.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 151.317
+
+[sub_resource type="Animation" id=2]
+resource_name = "Spawn"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Tank" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 2
+collision_mask = 11
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2.62028, 1.13246 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -56.904, -138, 59.096, -138, 139.096, -57, 139.096, 57, 58.096, 138, -55.904, 138, -136.904, 58, -136.904, -59 )
+
+[node name="RepulsionArea" type="Area2D" parent="."]
+position = Vector2( 4.36535, 0 )
+
+[node name="AreaCollider" type="CollisionShape2D" parent="RepulsionArea"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Spawn"
+anims/Spawn = SubResource( 2 )
+
+[node name="BulletSpawns" type="Node2D" parent="."]
+position = Vector2( 4.36535, 0 )
+
+[node name="Position2D13" type="Position2D" parent="BulletSpawns"]
+position = Vector2( 150.058, 0 )
+scale = Vector2( 2, 2 )
+
+[node name="Position2D4" type="Position2D" parent="BulletSpawns"]
+position = Vector2( 145.772, -67.1428 )
+rotation = -0.785398
+scale = Vector2( 2, 2 )
+
+[node name="Position2D6" type="Position2D" parent="BulletSpawns"]
+position = Vector2( 145.772, 67.1429 )
+rotation = -5.49779
+scale = Vector2( 2, 2 )
+[connection signal="area_entered" from="RepulsionArea" to="." method="_on_Area2D_area_entered"]

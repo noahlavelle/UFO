@@ -1,0 +1,156 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Player.png" type="Texture" id=1]
+[ext_resource path="res://Actors/Player.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 0.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "LeftIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BulletTimer/FullL:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.588235 ), Color( 1, 1, 1, 0.588235 ), Color( 1, 0, 0, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BulletTimer/FullL:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 12 ), Vector2( 40, 12 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "RightIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BulletTimer/FullR:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.588235 ), Color( 1, 1, 1, 0.588235 ), Color( 1, 0, 0, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BulletTimer/FullR:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 12 ), Vector2( 40, 12 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "RightIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("BulletTimer/FullR:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.588235 ), Color( 1, 1, 1, 0.588235 ), Color( 1, 0, 0, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BulletTimer/FullR:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 12 ), Vector2( 40, 12 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="BulletSpawn" type="Position2D" parent="."]
+position = Vector2( 34, 0.000152588 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 18, 0.400093 )
+rotation = 1.5708
+scale = Vector2( 0.7618, 0.7618 )
+texture = ExtResource( 1 )
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 11, 4.95911e-05 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="BulletTimer" type="ColorRect" parent="."]
+margin_left = -40.1508
+margin_top = -23.5335
+margin_right = -0.150772
+margin_bottom = -11.5335
+color = Color( 0.447059, 0.447059, 0.447059, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="BulletTimer"]
+margin_left = 0.150772
+margin_top = 37.4061
+margin_right = 40.1508
+margin_bottom = 49.4061
+color = Color( 0.447059, 0.447059, 0.447059, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullL" type="ColorRect" parent="BulletTimer"]
+margin_left = 0.150772
+margin_top = -0.46648
+margin_right = 0.150772
+margin_bottom = 11.5335
+color = Color( 1, 1, 1, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullR" type="ColorRect" parent="BulletTimer"]
+margin_left = 0.150772
+margin_top = 36.5335
+margin_right = 0.150772
+margin_bottom = 48.5335
+color = Color( 1, 1, 1, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LIn" type="AnimationPlayer" parent="."]
+anims/LeftIn = SubResource( 2 )
+anims/RightIn = SubResource( 3 )
+
+[node name="RIn" type="AnimationPlayer" parent="."]
+anims/RightIn = SubResource( 4 )

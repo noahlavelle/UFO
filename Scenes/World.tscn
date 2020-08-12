@@ -1,0 +1,165 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/WorldEnvironment.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/SceneManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Camera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fonts/BisonButton.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Scenes/World.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Fonts/BisonSmall.tres" type="DynamicFont" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1536, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 1285 )
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+position = Vector2( 88, 64 )
+script = ExtResource( 6 )
+
+[node name="Objects" type="Node2D" parent="."]
+pause_mode = 1
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="Player" parent="Objects" instance=ExtResource( 1 )]
+position = Vector2( 1448, 1211 )
+rotation = -1.5708
+z_index = 1
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="Objects/Player"]
+position = Vector2( -6.10352e-05, 3.05176e-05 )
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Bullets" type="Node" parent="Objects"]
+
+[node name="Enemies" type="Node" parent="Objects"]
+
+[node name="Particles" type="Node" parent="Objects"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
+visible = false
+rotation = -1.5708
+zoom = Vector2( 0.8, 0.8 )
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" parent="Environment" instance=ExtResource( 2 )]
+
+[node name="Border" type="Node" parent="Environment"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Border"]
+visible = false
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Border/StaticBody2D"]
+position = Vector2( 1536, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Environment/Border/StaticBody2D"]
+position = Vector2( 1536, 2560 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Environment/Border/StaticBody2D"]
+position = Vector2( 3072, 1275 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Environment/Border/StaticBody2D"]
+position = Vector2( 0, 1275 )
+shape = SubResource( 2 )
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="DeathScreen" type="Node2D" parent="Canvas"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 88, 64 )
+
+[node name="ColorRect" type="ColorRect" parent="Canvas/DeathScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -64.0
+margin_right = 1832.0
+margin_bottom = 1016.0
+color = Color( 1, 1, 1, 0.392157 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/DeathScreen"]
+margin_left = 8.0
+margin_top = -8.0
+margin_right = 1728.0
+margin_bottom = 962.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Canvas/DeathScreen/HBoxContainer"]
+margin_left = 544.0
+margin_top = 363.0
+margin_right = 1175.0
+margin_bottom = 606.0
+custom_fonts/font = ExtResource( 5 )
+text = "YOU DIED!
+CLICK TO PLAY AGAIN"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="Control" parent="Canvas"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1888.0
+margin_bottom = 1056.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EmptyXPBar" type="ColorRect" parent="Canvas/UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -384.0
+margin_top = -32.0
+margin_right = 384.0
+color = Color( 0.384314, 0.372549, 0.372549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XPBar" type="ColorRect" parent="Canvas/UI/EmptyXPBar"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -384.0
+margin_top = -32.0
+margin_right = -384.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Canvas/UI/EmptyXPBar"]
+margin_left = -104.211
+margin_top = -15.4772
+margin_right = -17.2113
+margin_bottom = 44.5228
+custom_fonts/font = ExtResource( 7 )
+text = "LVL: 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SceneManager" parent="." instance=ExtResource( 3 )]

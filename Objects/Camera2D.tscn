@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Objects/Camera2D.gd" type="Script" id=1]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 1448, 1211 )
+rotation = -4.46638e-06
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 3075
+limit_bottom = 2565
+limit_smoothed = true
+smoothing_enabled = true
+script = ExtResource( 1 )
